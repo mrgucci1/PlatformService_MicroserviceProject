@@ -2,11 +2,11 @@
 
 namespace PlatformService_MicroserviceProject.Data
 {
-    public class PLatformRepo : IPlatformRepo
+    public class PlatformRepo : IPlatformRepo
     {
         private readonly AppDbContext _context;
 
-        public PLatformRepo(AppDbContext context)
+        public PlatformRepo(AppDbContext context)
         {
             _context = context;
         }
