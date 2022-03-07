@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService_MicroserviceProject", "PlatformService_MicroserviceProject\PlatformService_MicroserviceProject.csproj", "{F555D922-F3EF-45E7-AAB8-121320F1B3AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformService", "PlatformService_MicroserviceProject\PlatformService.csproj", "{F555D922-F3EF-45E7-AAB8-121320F1B3AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "K8S", "K8S", "{5680E484-DF59-46EC-8E18-09E22BBD823E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
