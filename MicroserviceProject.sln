@@ -7,11 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformService", "Platform
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KUB", "KUB", "{FB023604-3FC4-4405-A7D3-B77A91A70DE2}"
 	ProjectSection(SolutionItems) = preProject
+		KUB\commands-depl.yaml = KUB\commands-depl.yaml
 		KUB\platforms-depl.yaml = KUB\platforms-depl.yaml
 		KUB\platforms-np-srv.yaml = KUB\platforms-np-srv.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandsService", "CommandsService\CommandsService.csproj", "{BB7BA208-2D7C-4A86-AD16-1765FD20669C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandsService", "CommandsService\CommandsService.csproj", "{BB7BA208-2D7C-4A86-AD16-1765FD20669C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
