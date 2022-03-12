@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KUB", "KUB", "{FB023604-3FC
 		KUB\commands-depl.yaml = KUB\commands-depl.yaml
 		KUB\ingress-srv.yaml = KUB\ingress-srv.yaml
 		KUB\local-pvc.yaml = KUB\local-pvc.yaml
+		KUB\mssql-plat-depl.yaml = KUB\mssql-plat-depl.yaml
 		KUB\platforms-depl.yaml = KUB\platforms-depl.yaml
 		KUB\platforms-np-srv.yaml = KUB\platforms-np-srv.yaml
 	EndProjectSection
