@@ -1,19 +1,33 @@
-﻿using PlatformService_MicroserviceProject.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PlatformService_MicroserviceProject.Models;
 
 namespace PlatformService_MicroserviceProject.Data
 {
     public static class PrepDb
     {
-        public static void PrepPopulation(IApplicationBuilder app)
+        public static void PrepPopulation(IApplicationBuilder app, bool prodFlag)
         {
             using(var serviceScope = app.ApplicationServices.CreateScope())
             {
-                SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>());
+                SeedData(serviceScope.ServiceProvider.GetService<AppDbContext>(), prodFlag);
             }
         }
 
-        private static void SeedData(AppDbContext context)
+        private static void SeedData(AppDbContext context, bool prodFlag)
         {
+            if (prodFlag)
+            {
+                try
+                {
+                    Console.WriteLine("Attempting to apply mirgrations");
+                    context.Database.Migrate();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine($"Could not apply migrations {ex.Message}");
+                }
+                
+            }
             if(!context.Platforms.Any())
             {
                 Console.WriteLine("Seeding Data...");

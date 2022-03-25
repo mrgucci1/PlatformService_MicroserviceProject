@@ -3,10 +3,20 @@ using PlatformService.SyncDataServices.Http;
 using PlatformService_MicroserviceProject.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
-builder.Services.AddDbContext<AppDbContext>(opt =>
+if (builder.Environment.IsDevelopment())
+{
+    Console.WriteLine("Using IN MEM DB, Dev enviroment");
+    builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseInMemoryDatabase("InMem"));
+}
+else
+{
+    Console.WriteLine("Using SQL Server, Prod enviroment");
+    builder.Services.AddDbContext<AppDbContext>(opt =>
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("PlatformsConn")));
+}
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 builder.Services.AddHttpClient<ICommandDataClient, CommandDataClient>();
@@ -19,7 +29,6 @@ Console.WriteLine("Hello");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -29,6 +38,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-PrepDb.PrepPopulation(app);
+PrepDb.PrepPopulation(app, builder.Environment.IsProduction());
 
 app.Run();
