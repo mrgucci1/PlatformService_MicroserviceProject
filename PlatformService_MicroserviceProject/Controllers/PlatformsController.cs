@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using PlatformService.AsyncDataServices;
+using PlatformService.Dtos;
 using PlatformService.SyncDataServices.Http;
 using PlatformService_MicroserviceProject.Data;
 using PlatformService_MicroserviceProject.Dtos;
@@ -14,12 +16,14 @@ namespace PlatformService_MicroserviceProject.Controllers
         private readonly IPlatformRepo _repository;
         private readonly IMapper _mapper;
         private readonly ICommandDataClient _commandDataClient;
+        private readonly IMessageBusClient _messageBusClient;
 
-        public PlatformsController(IPlatformRepo repository, IMapper mapper, ICommandDataClient commandDataClient)
+        public PlatformsController(IPlatformRepo repository, IMapper mapper, ICommandDataClient commandDataClient, IMessageBusClient messageBusClient)
         {
             _repository = repository;
             _mapper = mapper;
             _commandDataClient = commandDataClient;
+            _messageBusClient = messageBusClient;
         }
         [HttpGet]
         public ActionResult<IEnumerable<PlatformReadDto>> GetPlatforms()
@@ -45,6 +49,7 @@ namespace PlatformService_MicroserviceProject.Controllers
             _repository.CreatePlatform(platformModel);
             _repository.SaveChanges();
             var platformReadDto = _mapper.Map<PlatformReadDto>(platformModel);
+            //Send sync Message
             try
             {
                 await _commandDataClient.SendPlatformToCommand(platformReadDto);
@@ -52,6 +57,17 @@ namespace PlatformService_MicroserviceProject.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine("Error when sending platform to command service -> " + ex.Message);
+            }
+            //Send Async Message
+            try
+            {
+                var platformPublishDto = _mapper.Map<PlatformPublishDto>(platformReadDto);
+                platformPublishDto.Event = "Platform_Published";
+                _messageBusClient.PublishNewPlatform(platformPublishDto);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Could not send async {ex.Message}");
             }
             //respone with code 201, say what request can be used to GET created platform, then respond with id and plaformreaddto of created object
             //big part of REST

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PlatformService.Dtos;
 using PlatformService_MicroserviceProject.Dtos;
 using PlatformService_MicroserviceProject.Models;
 
@@ -12,6 +13,8 @@ namespace PlatformService_MicroserviceProject.Profiles
             CreateMap<Platform, PlatformReadDto>();
             // When creating, Source is create Dto and target is platform
             CreateMap<PlatformCreateDtos, Platform>();
+            //
+            CreateMap<PlatformReadDto, PlatformPublishDto>();
         }
     }
 }
