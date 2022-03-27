@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KUB", "KUB", "{FB023604-3FC
 		KUB\mssql-plat-depl.yaml = KUB\mssql-plat-depl.yaml
 		KUB\platforms-depl.yaml = KUB\platforms-depl.yaml
 		KUB\platforms-np-srv.yaml = KUB\platforms-np-srv.yaml
+		KUB\rabbitmq-depl.yaml = KUB\rabbitmq-depl.yaml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandsService", "CommandsService\CommandsService.csproj", "{BB7BA208-2D7C-4A86-AD16-1765FD20669C}"
